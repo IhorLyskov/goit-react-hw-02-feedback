@@ -30,22 +30,17 @@ export class App extends React.Component {
   render() {
     const total = this.countTotalFeedback();
     const positivePercentage = this.countPositiveFeedbackPercentage(total);
-
-    let statistics;
-    total
-      ? (statistics = (
-          <Statistics
-            good={this.state.good}
-            neutral={this.state.neutral}
-            bad={this.state.bad}
-            total={total}
-            positivePercentage={positivePercentage}
-          />
-        ))
-      : (statistics = (
-          <Notification message="There is no feedback"></Notification>
-        ));
-
+    const statistics = total ? (
+      <Statistics
+        parms={{
+          ...this.state,
+          total: total,
+          'Positive feedback': positivePercentage.toString() + '%',
+        }}
+      />
+    ) : (
+      <Notification message="There is no feedback"></Notification>
+    );
     return (
       <>
         <GlobalStyle />

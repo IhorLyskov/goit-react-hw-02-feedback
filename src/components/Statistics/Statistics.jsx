@@ -1,25 +1,32 @@
 import PropTypes from 'prop-types';
 import { StatList, StatItem } from './Statistics.styled';
-import React from 'react';
+import capitalize from 'lodash.capitalize';
 
-function Statistics({ good, neutral, bad, total, positivePercentage }) {
+function Statistics({ parms }) {
+  const keys = Object.keys(parms);
   return (
     <StatList>
-      <StatItem>Good: {good}</StatItem>
-      <StatItem>Neutral: {neutral}</StatItem>
-      <StatItem>Bad: {bad}</StatItem>
-      <StatItem>Total: {total}</StatItem>
-      <StatItem>Positive feedback: {positivePercentage}%</StatItem>
+      {keys.map(key => {
+        return (
+          <StatItem key={key}>
+            {capitalize(key)}: {parms[key]}
+          </StatItem>
+        );
+      })}
     </StatList>
   );
 }
 
 Statistics.propTypes = {
-  good: PropTypes.number,
-  neutral: PropTypes.number,
-  bad: PropTypes.number,
-  total: PropTypes.number,
-  positivePercentage: PropTypes.number,
+  parms: PropTypes.exact(
+    {
+      good: PropTypes.number.isRequired,
+      neutral: PropTypes.number.isRequired,
+      bad: PropTypes.number.isRequired,
+      total: PropTypes.number.isRequired,
+      'Positive feedback': PropTypes.string.isRequired,
+    }.isRequired
+  ),
 };
 
 export default Statistics;
