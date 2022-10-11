@@ -18,15 +18,13 @@ function Statistics({ parms }) {
 }
 
 Statistics.propTypes = {
-  parms: PropTypes.exact(
-    {
-      good: PropTypes.number.isRequired,
-      neutral: PropTypes.number.isRequired,
-      bad: PropTypes.number.isRequired,
-      total: PropTypes.number.isRequired,
-      'Positive feedback': PropTypes.string.isRequired,
-    }.isRequired
-  ),
+  parms: PropTypes.shape({
+    good: PropTypes.number.isRequired,
+    neutral: PropTypes.number.isRequired,
+    bad: PropTypes.number.isRequired,
+    total: PropTypes.number.isRequired,
+    'Positive feedback': PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Statistics;
